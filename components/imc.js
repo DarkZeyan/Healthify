@@ -21,22 +21,36 @@ export default function imcGUI() {
     }
     getData();
   }, []);
+  
   // Transformar a enteros la altura y el peso para calcular el imc
   parseInt(height);
   parseInt(weight);
   // Obtener el imc
-  function getIMC() {
-
-    const imc = weight / (Math.pow(height, 2));
-    return imc.toFixed(1);
+   function getIMC() {
+      
+      const imc = weight / (Math.pow(height, 2));
+      if(height!=0 && weight!=0){
+      if(imc>=30){
+        Alert.alert('Advertencia',`Hola ${name}.\nTienes obesidad. Tienes que bajar de peso o sufriras problemas de salud.`,['OK']);
+      }else if(imc>25){
+        Alert.alert('Advertencia',`Hola ${name}.\nTienes sobrepeso, procura consumir menos calorías`,['OK']);
+      }else if(imc>18.5){
+        Alert.alert('¡Felicidades!',`Hola ${name}.\nTu IMC es el correcto`,['OK']);
+      }else{
+        Alert.alert('Advertencia',`Hola ${name} Tu IMC es muy bajo.\nTienes que subir de peso`,['OK']);
+      }
+    }
+      return imc.toFixed(1);
+    
+   
   }
 
   return (
 
-    <View style={appStyle.imcMain}>
+    <View style={appStyle.main}>
       <View style={appStyle.headerContainer}>
         <Image
-        style={appStyle.imcImg}
+        style={appStyle.headerImg}
         source={require('../assets/img/bmi.png')}/>
         <Text style={appStyle.headerText}>Índice de masa corporal</Text>
       </View>

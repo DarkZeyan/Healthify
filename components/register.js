@@ -21,6 +21,7 @@ export default function Register(props){
             await AsyncStorage.setItem('Name',name);
             await AsyncStorage.setItem('Height',height);
             await AsyncStorage.setItem('Weight',weight);
+            await AsyncStorage.setItem('Gender', gender);
             props.navigation.navigate('imcGUI');
         } catch (error) {
             console.log(error);
@@ -40,7 +41,7 @@ export default function Register(props){
     }
     // Evaluar la entrada a la siguiente pantalla
     function evaluateAge(){
-        if (parseInt(age)==0 || name==null || height==0  || weight==0 || gender==null){
+        if (parseInt(age)==0 || name==null || height==0  || weight==0 || gender==null || !birthDate || !name || !gender){
             Alert.alert("Faltan datos","Por favor rellene los datos restantes.", ['OK']);
            
         }else if(parseInt(age)<15 ){
@@ -73,6 +74,7 @@ export default function Register(props){
                 source={require('../assets/img/name.png')}
                 />
                 <TextInput 
+                autoCapitalize='words'
                 textContentType='name'
                 onChangeText={name => setName(name)}
                 style={appStyle.regTxtInput}
@@ -165,7 +167,7 @@ export default function Register(props){
                 <TouchableOpacity style={appStyle.regButton}
                     onPress={()=>{evaluateAge()}}
                 >
-                    <Text style={appStyle.regBtnText} >Acceder</Text>
+                    <Text style={appStyle.regBtnText}>Acceder</Text>
                 </TouchableOpacity>
             </View>
         </View>
